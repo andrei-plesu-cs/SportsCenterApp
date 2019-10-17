@@ -2,7 +2,7 @@
 <div class="blur-background"></div>
 
 <div class="container-fluid my-container">
-        <div class="inner-container">
+        <div class="inner-container" *ngIf="! showCheck">
             <form *ngIf="!isLoading" [formGroup]="userInfoForm" (ngSubmit)="onSubmit()">
                 <div class="create-user-header text-center">
                     <span>{{message}}</span>
@@ -35,7 +35,7 @@
                     <div class="choose-sports">
                         <span>Assign the member to some sports</span>
                         <div class="assign-sports">
-                            <span class="sport-element" *ngFor="let sport of sports; let i = index" 
+                            <span class="sport-element" *ngFor="let sport of fethedSports; let i = index" 
                                 [ngClass]="{'sports-element-selected': selectedSport[i]}"
                                 (click)="selectSport(i, sport)">
                                 {{sport}}
@@ -63,4 +63,7 @@
             <app-loading-spinner *ngIf="isLoading" style="z-index: 100;"></app-loading-spinner>
 
         </div>
+
+        <app-check-button *ngIf="showCheck"></app-check-button>
+
 </div>

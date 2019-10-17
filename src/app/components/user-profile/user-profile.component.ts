@@ -30,10 +30,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    //get the id of the user that needs to be displayed from the query params
     this.paramsSubscriptions = this.currentRoute.params
       .subscribe(result => {
         this.user_id = result.id;
         
+        //fetches the entire member from the server based on the id
         this.userInfoSubscription = this.httpService.getMember(this.user_id)
           .subscribe((result: UserInformation) => {
             this.userInformation = result;
@@ -45,15 +47,22 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userInfoSubscription.unsubscribe();
-    this.paramsSubscriptions.unsubscribe();
+    if (this.userInfoSubscription) {
+      this.userInfoSubscription.unsubscribe();
+    }
+
+    if (this.paramsSubscriptions) {
+      this.paramsSubscriptions.unsubscribe();
+    }
+
   }
 
-  //function that handles the info update
+  //function that handles the information update on the current member
   editInfo() {
     this.isEdit = true;
   }
 
+  //fires events to the 'members' parent component
   emitDiscard(event: string): void {
     this.isEdit = false;
     if (event === 'done') {

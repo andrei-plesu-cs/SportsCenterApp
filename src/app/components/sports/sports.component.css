@@ -52,12 +52,51 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-evenly;
-    margin-top: 20px;
+    margin-top: 40px;
     padding: 0;
 }
 
 #app-card {
     margin-bottom: 40px;
+}
+
+.add-sport-form {
+    background-color: #7dce94;
+    width: 100%;
+    padding: 5rem 5rem 2rem 5rem;
+}
+
+.add-sport-inner-container {
+    font-family: 'Montserrat', sans-serif;
+    color: #3d3d3f;
+}
+
+.add-sport-button-section {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 35px;
+}
+
+.add-sport-button-section button {
+    width: 30%;
+    min-width: 140px;
+    border: 1px solid #3d3d3f;
+    border-radius: 12px;
+    background-color: #F9F8FD;
+    padding: .8rem 2rem;
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
+}
+
+input {
+    border: none;
+    background-color: #F9F8FD;
+    margin-bottom: 15px;
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
+    height: 3rem;
 }
 
 @media only screen and (max-width: 700px) {
@@ -68,4 +107,22 @@
     .sports-text-button {
         font-size: 1rem !important;
     }
+
+    .add-sport-form {
+        padding: 2rem 2rem 1rem 2rem !important;
+    }
+
+    .add-sport-button-section {
+        width: 100%;
+    }
+
+    .add-sport-button-section {
+        padding: .2rem 2rem !important;
+    }
+
+    .add-sport-button-section button {
+        font-size: .6rem;
+        padding: 12.8px 20px !important ;
+    }
+
 }

@@ -22,8 +22,7 @@ export class CardElementComponent implements OnInit {
   ngOnInit() {
   }
 
-  //function that navigates to the members page and applies filter based on the sport
-  //provided as input
+  //function that navigates to the members page and applies filter based on the sport provided as input
   navigateSports() {
     this.router.navigate(['members'], {
       queryParams: {

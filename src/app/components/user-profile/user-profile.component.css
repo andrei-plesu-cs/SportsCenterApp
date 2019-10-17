@@ -154,4 +154,14 @@
         font-size: 1rem;
     }
 
+    .pulse-button div {
+        bottom: 5%;
+    }
+
+    .pulse-button {
+        font-size: 1.5rem;
+        width: 50px;
+        height: 50px;
+    }
+
   }

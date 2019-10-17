@@ -8,17 +8,20 @@ import * as $ from 'jquery';
 })
 export class NavbarComponent implements OnInit {
 
-  //check if the button was triggered
+  //check if the button was triggered so it can display a blur background behind the navbar for small
+  //screens
   isClicked: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+
+    //the jquery used to trigger the drop down menu on small displays
     $(document).ready(function () {
       $('.first-button').on('click', function () {
-        console.log('da');
-          $('.animated-icon1').toggleClass('open');
+        $('.animated-icon1').toggleClass('open');
       });
+
     });
   }
 

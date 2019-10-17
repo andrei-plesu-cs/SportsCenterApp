@@ -20,9 +20,38 @@
             <br />
             <button 
                 class="sports-text-button btn btn-link"
-                type="button">
+                type="button"
+                (click)="addSport = !addSport"
+                *ngIf="!addSport">
                 Add sport
             </button>
+
+            <div class="add-sport-form" *ngIf="addSport">
+                <div class="add-sport-inner-container">
+                    <form [formGroup]="sportGroup" (ngSubmit)="onSubmit()">
+                        <input 
+                            type="text" 
+                            placeholder="Sport name" 
+                            class="form-control form-control-md"
+                            formControlName="sportName"/>
+                        <div class="add-sport-button-section">
+                            <button 
+                                type="submit"
+                                class="btn btn-md"
+                                style="font-weight: bold;">
+                                Save sport
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-md"
+                                (click)="addSport = !addSport">
+                                Discard
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
 
         <div class="sports-cards">

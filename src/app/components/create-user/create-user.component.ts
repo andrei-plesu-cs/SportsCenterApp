@@ -10,8 +10,11 @@ import { UserInformation } from 'src/app/interfaces/user.information.interface';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit, OnDestroy {
-
+  
+  //outputs
   @Output('emitDiscard') emitDiscard: EventEmitter<string> = new EventEmitter<string>();
+
+  //inputs
   @Input('isCreate') isCreate: boolean;
   @Input('message') message: string;
   @Input('userInfo') userInfo: UserInformation;
@@ -21,11 +24,15 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   postMemberSubscription: Subscription;
   updateMemberSubscription: Subscription;
 
-  sports: Array<string> = [];
-  sportsArray: Array<string> = [];
-  selectedSport: Array<boolean> = [];
+  fethedSports: Array<string> = []; //the sports fetched from the server
+  sportsArray: Array<string> = []; //describes what sports have been apllied as filters
+  selectedSport: Array<boolean> = []; //describes if the sport element at a given index show be colored in green
+  showCheck: boolean = false; //show check mark if all goes well
+  
+  //for the loading spinner
   isLoading: boolean = true;
 
+  //used for the reactive form
   userInfoForm: FormGroup = new FormGroup({
     first_name: new FormControl(''),
     last_name: new FormControl(''),
@@ -37,27 +44,29 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+
+    //fetch the sports
     this.sportsSubscription = this.httpService.getSports()
-      .subscribe(result => {
+      .subscribe(sportsObject => {
         this.isLoading = false;
-        this.sports = result.map(sport => {
-          return sport.name;
+        this.fethedSports = sportsObject.map(sportObject => {
+          return sportObject.name;
         });
 
+        //loads the elements required if the component is meant to update user data
         if (! this.isCreate) {
           this.userInfo.sports.forEach((sport: string, index: number) => {
             this.sportsArray.push(sport);
 
-            if (this.sports.indexOf(sport) >= 0) {
-              this.selectedSport[this.sports.indexOf(sport)] = true;
+            if (this.fethedSports.indexOf(sport) >= 0) {
+              this.selectedSport[this.fethedSports.indexOf(sport)] = true;
             }
           });
-          console.log(this.sportsArray);
-          console.log(this.selectedSport);
-        }
+        };
 
       });
 
+    //loads the user data as input for form fields
     if (! this.isCreate) {
       this.userInfoForm.setValue({
         first_name: this.userInfo.first_name,
@@ -68,7 +77,9 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sportsSubscription.unsubscribe();
+    if (this.sportsSubscription) {
+      this.sportsSubscription.unsubscribe();
+    }
 
     if (this.postMemberSubscription) {
       this.postMemberSubscription.unsubscribe();
@@ -80,8 +91,8 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   }
 
+  //notify the parent compoent when to hide current component
   onDiscard() {
-    console.log('This is so good');
     this.emitDiscard.emit('discard');
   }
 
@@ -101,6 +112,8 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   //function that handles the form submit
   onSubmit() {
+
+    //construct the data
     let userInformation: UserInformation = {
       first_name: this.userInfoForm.value.first_name,
       last_name: this.userInfoForm.value.last_name,
@@ -108,6 +121,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       sports: this.sportsArray
     }
 
+    //send it according to the purpose of the component: update data or create new entry
     if (this.isCreate) {
       this.handleCreate(userInformation);
     } else {
@@ -116,22 +130,35 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   }
 
+  //sends the data to the server and handles the response
   handleCreate(userInformation: UserInformation): void {
     this.isLoading = true;
     this.postMemberSubscription = this.httpService.postMember(userInformation)
-      .subscribe(result => {
+      .subscribe(() => {
         this.isLoading = false;
-        this.emitDiscard.emit('done');
+        this.checkButtonHandler();
     });
-  }
+  };
 
+  //sends the data to the server and handles the response
   handleUpdate(userInformation: UserInformation, id: string): void {
     this.isLoading = true;
     this.updateMemberSubscription = this.httpService.updateMember(id, userInformation)
-      .subscribe(result => {
+      .subscribe(() => {
         this.isLoading = false;
-        this.emitDiscard.emit('done');
-      })
-  }
+        this.checkButtonHandler();
+
+      });
+  };
+
+  checkButtonHandler(): void {
+    this.showCheck = true;
+    
+    setTimeout(() => {
+      console.log('da');
+      this.showCheck = false;
+      this.emitDiscard.emit('done');
+    }, 1000);
+  } 
 
 }
