@@ -1,0 +1,39 @@
+
+<div *ngIf="!isLoading">
+    <div class="container-fluid my-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 text-center">
+                    <span class="cover-text">Sports</span>
+                    <br />
+                    <span class="cover-text-subheader">Enjoy yourself</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sports-text">
+            <span class="sports-text-header">
+                Currently offering membership for the following sports
+            </span>
+            <br />
+            <button 
+                class="sports-text-button btn btn-link"
+                type="button">
+                Add sport
+            </button>
+        </div>
+
+        <div class="sports-cards">
+            <app-card-element
+                id="app-card"
+                *ngFor="let card of cards; let i = index"
+                [cardInfo]="card" ></app-card-element>
+        </div>
+
+    </div>
+</div>
+
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+

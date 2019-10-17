@@ -1,0 +1,43 @@
+
+<!-- Component that describes an individual member -->
+<div class="individual-member container">
+    <div class="row">
+        <div class="col-lg-5 col-sm-12 col-xs-12 col-md-12">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-xs-12 col-sm-12 text-center" style="margin-bottom: 10px">
+                    <img
+                        class="rounded-circle" 
+                        [src]="userInformation.imageUrl" 
+                        alt="Profile picture" />
+                </div>
+                <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12 info-row" style="text-align: left; margin-bottom: 10px;">
+                    <p class="user-name">
+                        {{returnFullName()}}
+                    </p>
+                    <button 
+                        type="button"
+                        class="btn btn-md btn-link see-profile-link"
+                        (click)="onSeeProfile()"
+                        >
+                        See profile
+                        </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12 col-md-12 sports-container">
+            <div class="sports-element" *ngFor="let sport of userInformation.sports; let i = index">
+                <span>{{sport}}</span>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%; position: absolute; bottom: 10px; right: 15px;" class="text-right ">
+        <span (click)="showModal = true" class="delete-user"><i class="fas fa-trash-alt"></i></span>
+    </div>
+</div>
+
+<app-modal 
+    *ngIf="showModal" 
+    [message]="'Are you sure you want to delete  ' + userInformation.first_name + ' from the database ?' "
+    [inputType]="'yes-no'"
+    [backgroundColor]="'#7acfd6'"
+    (onEmit)="handleEvent($event)"></app-modal>

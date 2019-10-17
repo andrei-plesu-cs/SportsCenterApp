@@ -1,0 +1,30 @@
+
+<div class="blur-background"></div>
+
+<div class="container-fluid my-container">
+    <div class="inner-container" [style.backgroundColor]="backgroundColor">
+        <div class="message">
+            <span>{{message}}</span>
+        </div>
+        
+        <div>
+            <div *ngIf="inputType === 'yes-no'" class="button-section">
+                <button 
+                    type="button"
+                    class="btn btn-md btn-yes"
+                    (click)="handleYes()" >Yes</button>
+                <button 
+                    type="button" 
+                    class="btn btn-md btn-no"
+                    (click)="handleNo()" >No</button>
+            </div>
+            <div *ngIf="inputType === 'ok'" class="button-section">
+                <button 
+                    type="button" 
+                    class="btn btn-md btn-ok"
+                    (click)="handleOf()">Ok</button>
+            </div>
+        </div>
+
+    </div>
+</div>

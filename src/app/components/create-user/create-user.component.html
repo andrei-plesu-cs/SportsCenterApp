@@ -1,0 +1,66 @@
+
+<div class="blur-background"></div>
+
+<div class="container-fluid my-container">
+        <div class="inner-container">
+            <form *ngIf="!isLoading" [formGroup]="userInfoForm" (ngSubmit)="onSubmit()">
+                <div class="create-user-header text-center">
+                    <span>{{message}}</span>
+                </div>
+
+                <div class="information-section">
+
+                    <div class="image-div">
+                        <span>Enter the url to the image</span>
+                        <span id="under-image-text">Leave blank for default</span>
+                        <textarea class="form-control form-control-md" placeholder="Url..." formControlName="imageUrl"></textarea>
+                    </div>
+
+                    <div class="first-last-name">
+                        <span>First name and last name</span>
+                        <input 
+                            type="text" 
+                            placeholder="First name"
+                            class="form-control form-control-md create-user-input"
+                            formControlName="first_name"
+                            />
+                        <input 
+                            type="text" 
+                            placeholder="Last name"
+                            class="form-control form-control-md create-user-input"
+                            formControlName="last_name"
+                            />
+                    </div>
+
+                    <div class="choose-sports">
+                        <span>Assign the member to some sports</span>
+                        <div class="assign-sports">
+                            <span class="sport-element" *ngFor="let sport of sports; let i = index" 
+                                [ngClass]="{'sports-element-selected': selectedSport[i]}"
+                                (click)="selectSport(i, sport)">
+                                {{sport}}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="under-buttons">
+                        <button 
+                            type="submit"
+                            class="btn btn-md save-button">
+                            Save
+                        </button>
+                        <button 
+                            type="button"
+                            (click)="onDiscard()"
+                            class="btn btn-md discard-button">
+                            Discard
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+            <app-loading-spinner *ngIf="isLoading" style="z-index: 100;"></app-loading-spinner>
+
+        </div>
+</div>

@@ -1,0 +1,17 @@
+
+<div class="card-item">
+        <div class="card-header">
+            {{cardInfo.sportName}}
+        </div>
+        <div class="card-body text-center">
+                <span><i class="fas fa-users"></i></span>
+                <br />
+                <span>{{cardInfo.noOfMembers}} members</span>
+            </div>
+        <div class="card-footer">
+            <button 
+                type="button"
+                class="btn btn-md card-button"
+                (click)="navigateSports()">See Members</button>
+        </div>
+</div>

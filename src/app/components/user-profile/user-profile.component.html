@@ -1,0 +1,71 @@
+
+<!-- User profile information -->
+<div *ngIf="!isLoading">
+    <div class="container-fluid my-container">
+        <div class="image-container">
+            <img 
+                [src]="userInformation.imageUrl" 
+                alt="Profile picture"
+                class="rounded-circle" />
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="add-member-button">
+            <button
+                type="button"
+                class="btn btn-md"
+                (click)="editInfo()">
+                Edit profile
+            </button>
+        </div>
+
+        <div class="user-information">
+            <div class="user-information-field text-center">
+                <p class="user-key">
+                    <span>First name</span>
+                </p>
+                <div class="user-value">
+                    {{userInformation.first_name}}
+                </div>
+            </div>
+
+            <div class="user-information-field text-center">
+                <p class="user-key">
+                    <span>Second name</span>
+                </p>
+                <div class="user-value">
+                    {{userInformation.last_name}}
+                </div>
+            </div>
+        </div>
+
+        <div class="sports-section">
+            <div class="sports-header-section">
+                <span>{{userInformation.first_name}} is currently a member of</span>
+            </div>
+
+            <div class="sports-section-primer">
+                <div class="sport-element" *ngFor="let sport of userInformation.sports; let i = index">
+                    <span>{{sport.charAt(0).toUpperCase() + sport.slice(1)}}</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="pulse-button-div" *ngIf="!isLoading" (click)="editInfo()">
+    <button type="button" class="pulse-button"><i class="fas fa-user-edit"></i></button>
+</div>
+
+<app-create-user 
+    *ngIf="isEdit" 
+    (emitDiscard)="emitDiscard($event)"
+    [message]="'Edit user info'"
+    [isCreate]="false"
+    [userInfo]="userInformation">
+</app-create-user>
+
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

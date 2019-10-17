@@ -1,0 +1,71 @@
+
+.my-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 50vh;
+    background-image: url("../../../assets/images/sports_cover.jpg");
+    background-size: cover;
+    margin-top: -70px;
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sports-text {
+    margin-top: 55px;
+    text-align: center;
+}
+
+.sports-text-header {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    color: darkgray;
+}
+
+.sports-text-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #7dce94 !important;
+    margin-top: -5px;
+}
+
+.cover-text {
+    font-family: 'Montserrat', sans-serif;
+    color: #3d3d3f;
+    font-weight: bold;
+    font-size: 4.5rem;
+}
+
+.cover-text-subheader {
+    font-family: 'Montserrat', sans-serif;
+    color: darkgray;
+    font-weight: 3rem;
+    margin-top: -20px !important;
+}
+
+.sports-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    padding: 0;
+}
+
+#app-card {
+    margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 700px) {
+    .sports-text-header {
+        font-size: 1.2rem !important;
+    }
+
+    .sports-text-button {
+        font-size: 1rem !important;
+    }
+}

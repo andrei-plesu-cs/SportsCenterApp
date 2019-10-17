@@ -1,0 +1,63 @@
+
+<!-- Members component -->
+<div *ngIf="!isLoading" class="container members-container">
+
+    <!-- Add member button -->
+    <div class="add-member-button">
+        <button
+            type="button"
+            class="btn btn-md"
+            (click)="createUser = true">
+            Add member
+        </button>
+    </div>
+
+    <!-- Section to display the filters and the members -->
+    <div class="main-member-section">
+        <div class="filters-section">
+            <span class="filters">Filters</span>
+            <span 
+                id="order-by" class="filter-button" (click)="filterButton('orderBy')" >
+                {{orderPhrase}}</span>
+            <span 
+                id="filter-by" class="filter-button" (click)="filterButton('filterBy')" >
+                {{filterPhrase}}</span>
+        </div>
+    </div>
+
+    <div class="order-by" id="order-by-box">
+        <span id="filter-span" class="filter-asc" (click)="handleFilter('Ascending')">Name ascending</span>
+        <span id="filter-span" class="filter-desc" (click)="handleFilter('Descending')">Name descending</span>
+    </div>
+
+    <div class="filter-by-sports" id="filter-by-box">
+        <span 
+            *ngFor="let sport of sports; let i = index" 
+            id="filter-span" 
+            (click)="handleFilter(sport)"
+            [style.color]="checkFilterByColor(sport) ? '#7dce94' : '#3d3d3f'">
+            {{sport}}
+        </span>
+    </div>
+
+</div>
+
+<div class="members-section container-fluid">
+    <app-individual-member 
+        *ngFor="let user of users; let i = index"
+        [userInformation]="user"></app-individual-member>
+</div>
+
+<app-create-user 
+    *ngIf="createUser"
+    (emitDiscard)="emitDiscard($event)"
+    [message]="'Add user'"
+    [isCreate]="true">
+</app-create-user>
+
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+<!-- Add pulsing button on the page -->
+<div class="pulse-button-div" *ngIf="!isLoading" (click)="createUser = true">
+    <button type="button" class="pulse-button"><i class="fas fa-plus"></i></button>
+</div>

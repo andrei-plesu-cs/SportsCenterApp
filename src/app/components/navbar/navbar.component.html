@@ -1,0 +1,35 @@
+
+<div class="back-blur" *ngIf="isClicked"></div>
+
+<!-- The navbar of the app -->
+<nav class="navbar navbar-expand-sm fixed-top">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">
+            SS
+        </span>
+
+        <!-- Collapse button -->
+        <button 
+            class="navbar-toggler first-button" 
+            type="button" data-toggle="collapse" 
+            data-target="#navbarSupportedContent20"
+            (click)="isClicked = !isClicked"
+            aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="animated-icon1"><span></span><span></span><span></span></div>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent20">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/members">Members</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/sports">Sports</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
