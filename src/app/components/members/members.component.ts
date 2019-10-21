@@ -179,28 +179,28 @@ export class MembersComponent implements OnInit, OnDestroy {
     if (event === 'Ascending') {
       if (this.orderPhrase === 'Order by' || this.orderPhrase === 'Order by (descending)') {
         this.orderPhrase = 'Order by (ascending)';
-        document.querySelector('.filter-asc').style.color = '#7dce94';
+        (document.querySelector('.filter-asc') as HTMLElement).style.color = '#7dce94';
         
         //apply the order by filters in ascending order
         this.applyOrderBy(true);
 
       } else {
         this.orderPhrase = 'Order by';
-        document.querySelector('.filter-asc').style.color = '#3d3d3f';
+        (document.querySelector('.filter-asc') as HTMLElement).style.color = '#3d3d3f';
       }
 
     //in descending order
     } else if (event === 'Descending') {
       if (this.orderPhrase === 'Order by' || this.orderPhrase === 'Order by (ascending)') {
         this.orderPhrase = 'Order by (descending)';
-        document.querySelector('.filter-desc').style.color = '#7dce94';
+        (document.querySelector('.filter-desc') as HTMLElement).style.color = '#7dce94';
 
         //apply indescending order
         this.applyOrderBy(false);
 
       } else {
         this.orderPhrase = 'Order by';
-        document.querySelector('.filter-desc').style.color = '#3d3d3f';
+        (document.querySelector('.filter-desc') as HTMLElement).style.color = '#3d3d3f';
       }
     } else {
       this.handleFilterByText(event);
